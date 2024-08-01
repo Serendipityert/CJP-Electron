@@ -1,0 +1,67 @@
+{
+  "name": "electron",
+  "private": true,
+  "version": "0.0.0",
+  "main": "electron/main.js",
+  "scripts": {
+    "dev": "vite --mode dev",
+    "prod": "vite --mode prod",
+    "prebuild": "echo GH_TOKEN=$GH_TOKEN",
+    "build": "cross-env DEBUG=electron-builder GH_TOKEN=$GH_TOKEN electron-icon-builder --input=./public/logo.png --output=build --flatten && vite build --mode prod &&  electron-builder",
+    "electron:generate-icons": "electron-icon-builder --input=./public/logo.png --output=build --flatten",
+    "electron": "wait-on tcp:3000 && cross-env NODE_ENV=development electron .",
+    "start": "concurrently -k \"yarn dev\" \"yarn electron\""
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Serendipityert/CJP-Electron.git"
+  },
+  "build": {
+    "productName": "CJP-Electron",
+    "copyright": "copyright @ 2024 GL",
+    "mac": {
+      "category": "public.app-category.utilities",
+      "icon": "build/icons/icon.icns"
+    },
+    "win": {
+      "icon": "build/icons/icon.ico"
+    },
+    "nsis": {
+      "oneClick": false,
+      "allowToChangeInstallationDirectory": true
+    },
+    "files": [
+      "dist/**/*",
+      "electron/**/*"
+    ],
+    "directories": {
+      "buildResources": "assets",
+      "output": "dist_electron"
+    },
+    "publish": [
+      {
+        "provider": "github",
+        "owner": "Serendipityert",
+        "repo": "CJP-Electron",
+        "releaseType": "draft"
+      }
+    ]
+  },
+  "dependencies": {
+    "electron-log": "^5.1.7",
+    "update-electron-app": "^3.0.0",
+    "vue": "^3.4.31"
+  },
+  "devDependencies": {
+    "@vitejs/plugin-vue": "^5.0.5",
+    "concurrently": "^8.2.2",
+    "cross-env": "^7.0.3",
+    "electron": "^31.2.1",
+    "electron-builder": "^24.13.3",
+    "electron-icon-builder": "^2.0.1",
+    "typescript": "^5.2.2",
+    "vite": "^5.3.4",
+    "vue-tsc": "^2.0.24",
+    "wait-on": "^7.2.0"
+  }
+}
