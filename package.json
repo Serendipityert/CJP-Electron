@@ -7,7 +7,7 @@
     "dev": "vite --mode dev",
     "prod": "vite --mode prod",
     "prebuild": "echo GH_TOKEN=$GH_TOKEN",
-    "build": "cross-env DEBUG=electron-builder GH_TOKEN=$GH_TOKEN electron-icon-builder --input=./public/logo.png --output=build --flatten && vite build --mode prod &&  electron-builder",
+    "build": "electron-icon-builder --input=./public/logo.png --output=build --flatten && vite build --mode prod &&  electron-builder",
     "electron:generate-icons": "electron-icon-builder --input=./public/logo.png --output=build --flatten",
     "electron": "wait-on tcp:3000 && cross-env NODE_ENV=development electron .",
     "start": "concurrently -k \"yarn dev\" \"yarn electron\""
@@ -17,11 +17,12 @@
     "url": "https://github.com/Serendipityert/CJP-Electron.git"
   },
   "build": {
-    "productName": "CJP-Electron",
+    "productName": "菜鸡平",
     "copyright": "copyright @ 2024 GL",
     "mac": {
       "category": "public.app-category.utilities",
-      "icon": "build/icons/icon.icns"
+      "icon": "build/icons/icon.icns",
+      "identity": "cjp-1208-gyt"
     },
     "win": {
       "icon": "build/icons/icon.ico"

@@ -48,9 +48,9 @@ const createWindow = (width, height) => {
   );
 
   // 打开开发工具
-  // if (NODE_ENV === "development") {
-  win.webContents.openDevTools();
-  // }
+  if (NODE_ENV === "development") {
+    win.webContents.openDevTools();
+  }
 };
 
 // app.setAppUserModelId("相知相识");
@@ -61,8 +61,8 @@ Menu.setApplicationMenu(null);
  * 桌面通知
  * show():即时向用户展示 notification
  */
-const NOTIFICATION_TITLE = "Hello 初识";
-const NOTIFICATION_BODY = "初识音乐";
+const NOTIFICATION_TITLE = "Hello 菜鸡平";
+const NOTIFICATION_BODY = "菜鸡平";
 
 function showNotification() {
   new Notification({
@@ -149,3 +149,8 @@ ipcMain.on("minimize-app", () => {
 ipcMain.on("close-app", () => {
   app.quit();
 });
+
+/**
+ * gh release create v1.0.0 ./dist_electron/菜鸡平-0.0.0-arm64.dmg  --title "v1.0.0" --notes "Initial release"
+ * xattr -d com.apple.quarantine /Applications/菜鸡平.app
+ */
